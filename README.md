@@ -23,10 +23,10 @@
 
 <div>
 <a href="https://github.com/CrazyStudent13">
-  <img height="160" src="https://github-readme-stats.vercel.app/api?username=CrazyStudent13&show_icons=true&theme=radical"/>
+  <img height="200" src="./profile-stats/stats.svg" alt="CrazyStudent13 的 GitHub 公开仓库、Star、Fork 和关注者统计"/>
 </a>
 <a href="https://github.com/CrazyStudent13">
-  <img height="160" src="https://github-readme-stats.vercel.app/api/top-langs/?username=CrazyStudent13&layout=compact&theme=Gradient&bg_color=30,ff758c,e4efe9&text_color=black&title_color=29323c"/>
+  <img height="200" src="./profile-stats/top-langs.svg" alt="公开非 Fork 仓库的编程语言占比（按代码字节数）"/>
 </a>
 </div>
 

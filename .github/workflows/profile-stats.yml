@@ -1,0 +1,42 @@
+name: Update profile statistics
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - scripts/generate_profile_cards.py
+      - .github/workflows/profile-stats.yml
+  schedule:
+    - cron: '23 18 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: profile-stats
+  cancel-in-progress: false
+
+jobs:
+  generate:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Generate SVG cards
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
+        run: python scripts/generate_profile_cards.py
+      - name: Commit updated cards
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add profile-stats/*.svg
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: update profile statistics"
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
